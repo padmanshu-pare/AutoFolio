@@ -1,0 +1,25 @@
+{
+  "name": "autofolio-1",
+  "version": "1.0.0",
+  "description": "AutoFolio is an AI-powered portfolio generator that helps users create professional, personalized portfolios in just a few clicks. Instead of manually designing and writing content, users simply provide their LinkedIn profile, GitHub link, and resume PDF, and AutoFolio does the rest.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JrNirmalbafna/AutoFolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/JrNirmalbafna/AutoFolio/issues"
+  },
+  "homepage": "https://github.com/JrNirmalbafna/AutoFolio#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
+  }
+}

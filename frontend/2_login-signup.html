@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoFolio | Login & Signup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <style>
+        input {
+            border-radius: 8px;
+            /* rounded corners */
+            transition: all 0.3s ease;
+            padding: 10px;
+            /* more space inside input */
+        }
+
+        input:hover,
+        input:focus {
+            box-shadow: 0 0 15px #00ff88;
+            border-color: #00ff88;
+            outline: none;
+        }
+
+        /* Fix floating label overlap */
+        input:focus+label,
+        input:valid+label {
+            top: -12px !important;
+            font-size: 12px;
+            color: #00ff88;
+        }
+    </style>
+
+</head>
+
+<!-- Navbar -->
+<nav class="fixed w-full top-0 z-50 bg-neutral-900 backdrop-blur-md shadow-md">
+    <div class="flex justify-between items-center px-8 py-4 max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-emerald-400">AutoFolio</h1>
+        <div class="space-x-8 text-xl">
+            <a href="1_landing_page.html" class="hover:text-emerald-400 transition">Home</a>
+
+        </div>
+    </div>
+</nav>
+
+<body class="bg-zinc-950  flex items-center justify-center min-h-screen text-white font-sans">
+    <!-- Particle Background -->
+    <div id="particles-js" class="absolute top-0 left-0 w-full h-full -z-10"></div>
+
+    <div class="relative w-[850px] h-[520px] 
+        bg-white/10 border border-white/20
+        backdrop-blur-msm rounded-2xl 
+        shadow-lg shadow-emerald-800/40 
+        overflow-hidden transition-all duration-700" id="wrapper">
+
+
+        <!-- Login Form -->
+        <div
+            class="absolute top-0 left-0 w-1/2 h-full flex flex-col justify-center px-12 transition-all duration-700 form-box login">
+            <h2 class="text-3xl font-bold text-emerald-400 mb-6 text-center">Login</h2>
+            <form id="loginForm">
+                <div class="mb-7 relative">
+                    <input type="text" name="username" id="login-username" required
+                        class="w-full bg-transparent border-b-2  border-gray-500 focus:border-emerald-500 outline-none py-2 px-2 peer" />
+                    <label
+                        class="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 text-sm transition-all peer-focus:top-[-8px] peer-focus:text-emerald-400 peer-valid:top-[-8px] peer-valid:text-emerald-400">Username</label>
+                    <i class="bx bxs-user absolute right-2 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+
+                <div class="mb-6 relative">
+                    <input type="password" name="password" required
+                        class="w-full bg-transparent border-b-2 border-gray-500 focus:border-emerald-500 outline-none py-2 px-2 peer" />
+                    <label
+                        class="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 text-sm transition-all peer-focus:top-[-8px] peer-focus:text-emerald-400 peer-valid:top-[-8px] peer-valid:text-emerald-400">Password</label>
+                    <i class="bx bxs-lock-alt absolute right-2 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+
+
+
+                <button type="submit"
+                    class="w-full py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 transition font-semibold">Login</button>
+                <p class="text-sm text-center mt-4">Don’t have an account? <a href="#" id="signup-link"
+                        class="text-emerald-400 hover:underline">Sign Up</a></p>
+            </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div
+            class="absolute top-0 right-[-100%] w-1/2 h-full flex flex-col justify-center px-12 transition-all duration-700 form-box register">
+            <h2 class="text-3xl font-bold text-emerald-400 mb-6 text-center">Sign Up</h2>
+            <form id="signupForm">
+                <div class="mb-6 relative">
+                    <input type="text" name="username" id="signup-username" required
+                        class="w-full bg-transparent border-b-2 border-gray-500 focus:border-emerald-500 outline-none py-2 peer" />
+                    <label
+                        class="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 text-sm transition-all peer-focus:top-[-8px] peer-focus:text-emerald-400 peer-valid:top-[-8px] peer-valid:text-emerald-400">Username</label>
+                    <i class="bx bxs-user absolute right-2 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+
+                <div class="mb-6 relative">
+                    <input type="email" name="email" id="signup-email" required
+                        class="w-full bg-transparent border-b-2 border-gray-500 focus:border-emerald-500 outline-none py-2 peer" />
+                    <label
+                        class="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 text-sm transition-all peer-focus:top-[-8px] peer-focus:text-emerald-400 peer-valid:top-[-8px] peer-valid:text-emerald-400">Email</label>
+                    <i class="bx bxs-envelope absolute right-2 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+
+                <div class="mb-6 relative">
+                    <input type="password" name="password" required
+                        class="w-full bg-transparent border-b-2 border-gray-500 focus:border-emerald-500 outline-none py-2 peer" />
+                    <label
+                        class="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 text-sm transition-all peer-focus:top-[-8px] peer-focus:text-emerald-400 peer-valid:top-[-8px] peer-valid:text-emerald-400">Password</label>
+                    <i class="bx bxs-lock-alt absolute right-2 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+
+
+                <button type="submit"
+                    class="w-full py-2 rounded-lg bg-emerald-500 hover:bg-emerald-600 transition font-semibold">Sign
+                    Up</button>
+                <p class="text-sm text-center mt-4">Already have an account? <a href="#" id="login-link"
+                        class="text-emerald-400 hover:underline">Login</a></p>
+            </form>
+        </div>
+
+        <!-- Info Panel -->
+        <div
+            class="absolute top-0 right-0 w-1/2 h-full flex flex-col justify-center items-center text-center bg-gradient-to-br from-zinc-500/20 to-emerald-500/60 p-10 transition-all duration-70 text-white info-panel">
+            <h2 class="text-3xl font-bold mb-3" id="panel-title">Welcome Back!</h2>
+            <p class="text-2sm mb-6" id="panel-text">Log in with your details and continue building your portfolio.</p>
+            <button id="toggle-btn"
+                class="px-6 py-2 border-2 border-white rounded-lg font-semibold hover:bg-white hover:text-emerald-600 transition">Sign
+                Up</button>
+        </div>
+
+    </div>
+
+    <script>
+        const wrapper = document.getElementById('wrapper');
+        const signupLink = document.getElementById('signup-link');
+        const loginLink = document.getElementById('login-link');
+        const toggleBtn = document.getElementById('toggle-btn');
+        const panelTitle = document.getElementById('panel-title');
+        const panelText = document.getElementById('panel-text');
+
+        // Toggle forms
+        signupLink.onclick = (e) => {
+            e.preventDefault();
+            wrapper.classList.add('active');
+            document.querySelector(".login").style.transform = "translateX(-100%)";
+            document.querySelector(".login").style.opacity = "0";
+            document.querySelector(".register").style.right = "0";
+            document.querySelector(".register").style.opacity = "1";
+            document.querySelector(".info-panel").style.left = "0";
+            panelTitle.textContent = "Hello, Friend!";
+            panelText.textContent = "Register with your details to start using AutoFolio.";
+            toggleBtn.textContent = "Login";
+        }
+
+        loginLink.onclick = (e) => {
+            e.preventDefault();
+            wrapper.classList.remove('active');
+            document.querySelector(".login").style.transform = "translateX(0)";
+            document.querySelector(".login").style.opacity = "1";
+            document.querySelector(".register").style.right = "-100%";
+            document.querySelector(".register").style.opacity = "0";
+            document.querySelector(".info-panel").style.left = "auto";
+            panelTitle.textContent = "Welcome Back!";
+            panelText.textContent = "Log in with your details and continue building your portfolio.";
+            toggleBtn.textContent = "Sign Up";
+        }
+
+        toggleBtn.onclick = () => {
+            if (wrapper.classList.contains('active')) {
+                loginLink.click();
+            } else {
+                signupLink.click();
+            }
+        }
+
+        // Store signup data in localStorage
+        document.getElementById("signupForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById("signup-username").value;
+            const email = document.getElementById("signup-email").value;
+            const password = e.target.password.value;
+
+            const user = { username, email, password };
+            localStorage.setItem("user", JSON.stringify(user));
+
+            alert("Signup successful! Please login now.");
+            loginLink.click(); // Switch to login form
+        });
+
+        // Check login data
+        document.getElementById("loginForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById("login-username").value;
+            const password = e.target.password.value;
+
+            const savedUser = JSON.parse(localStorage.getItem("user"));
+
+            if (savedUser && savedUser.username === username && savedUser.password === password) {
+                alert("Login successful! Welcome " + savedUser.username);
+                // Example: redirect to dashboard
+                window.location.href = "3_link_insertion.html"; // Change this to your dashboard URL
+            } else {
+                alert("Invalid credentials!");
+            }
+        });
+
+    </script>
+    <!-- Particles.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <script>
+        /* Particle configuration */
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00ff88" },
+                "shape": { "type": "circle" },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00ff88",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 4,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out"
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "repulse" },
+                    "onclick": { "enable": true, "mode": "push" }
+                },
+                "modes": {
+                    "repulse": { "distance": 100 },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+
+</body>
+
+</html>
