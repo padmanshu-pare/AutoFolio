@@ -19,3 +19,5 @@ The system analyzes user data, identifies their field, skills, projects, and ach
 🎯 Use Case
 
 AutoFolio is designed for students, professionals, and job-seekers who want to showcase their skills without spending hours designing a portfolio manually. It’s especially useful for hackathons, job applications, and freelancing opportunities.
+
+https://excalidraw.com/#json=XDH5N0zg709egZNOaQdqA,i2uS6uyIGgtIBIpOvetgoQ
