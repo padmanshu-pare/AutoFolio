@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoFolio | Theme Selection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-zinc-950 text-white font-sans">
+    <div id="tsparticles" class="fixed top-0 left-0 w-full h-full -z-10"></div>
+
+    <style>
+        body {
+            background: linear-gradient(-45deg, #0f172a, #065f46, #1e293b, #10b981);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+    <script>
+        tsParticles.load("tsparticles", {
+            background: { color: "transparent" },
+            fpsLimit: 60,
+            particles: {
+                number: { value: 50, density: { enable: true, area: 800 } },
+                color: { value: "#10b981" }, // emerald color
+                shape: { type: "circle" },
+                opacity: { value: 0.5 },
+                size: { value: { min: 1, max: 4 } },
+                move: { enable: true, speed: 1, direction: "none", outMode: "bounce" },
+                links: { enable: true, distance: 120, color: "#10b981", opacity: 0.3, width: 1 }
+            },
+            interactivity: {
+                events: { onHover: { enable: true, mode: "grab" }, onClick: { enable: true, mode: "push" } },
+                modes: { grab: { distance: 150, links: { opacity: 0.5 } }, push: { quantity: 4 } }
+            },
+            detectRetina: true
+        });
+    </script>
+
+
+
+
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-50 bg-neutral-900 backdrop-blur-md shadow-md">
+        <div class="flex justify-between items-center px-8 py-4 max-w-5xl mx-auto">
+            <h1 class="text-2xl font-bold text-emerald-400">AutoFolio</h1>
+            <div class="space-x-8 text-lg">
+                <a href="index.html" class="hover:text-emerald-400 transition">Home</a>
+                <a href="#" class="hover:text-emerald-400 transition">Themes</a>
+                <a href="#" class="hover:text-emerald-400 transition">FAQ</a>
+                <a href="#" class="hover:text-emerald-400 transition">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Section -->
+    <section class="px-8 pt-32 pb-20 max-w-7xl mx-auto text-center">
+        <h2 class="text-4xl font-extrabold mb-4">
+            Select Your Portfolio <span class="text-emerald-400">Theme</span>
+        </h2>
+        <p class="text-gray-400 mb-12">
+            Choose a design that matches your vibe. You can preview and customize later.
+        </p>
+
+        <!-- Theme Cards -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Classic -->
+            <div onclick="selectTheme(this,'Classic')"
+                class="theme-card bg-neutral-900 border border-white p-6 rounded-xl shadow-lg cursor-pointer hover:scale-105 transition hover:shadow-emerald-500/50 hover:shadow-lg transition-transform duration-300">
+
+                <img src="https://images.unsplash.com/photo-1530099486328-e021101a494a?q=80&w=1247&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Classic Theme Preview" class="h-40 w-full object-cover rounded-lg">
+                <h3 class="text-xl font-semibold mt-4">Classic</h3>
+                <p class="text-gray-400 text-sm">A clean and timeless portfolio layout for professionals.</p>
+            </div>
+
+            <!-- Techy -->
+            <div onclick="selectTheme(this,'Techy')"
+                class="theme-card bg-neutral-900 border border-white p-6 rounded-xl shadow-lg cursor-pointer hover:scale-105 transition hover:shadow-emerald-500/50 hover:shadow-lg transition-transform duration-300">
+                <img src="https://images.unsplash.com/flagged/photo-1553267252-d100936057c1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Techy Theme Preview" class="h-40 w-full object-cover rounded-lg">
+                <h3 class="text-xl font-semibold mt-4">Techy</h3>
+                <p class="text-gray-400 text-sm">Modern, bold, and sharp – perfect for developers and designers.</p>
+            </div>
+
+            <!-- Minimal -->
+            <div onclick="selectTheme(this,'Minimal')"
+                class="theme-card bg-neutral-900 border border-white p-6 rounded-xl shadow-lg cursor-pointer hover:scale-105 transition hover:shadow-emerald-500/50 hover:shadow-lg transition-transform duration-300">
+                <img src="https://plus.unsplash.com/premium_photo-1676654935493-10ee2b4f2a25?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Minimal Theme Preview" class="h-40 w-full object-cover rounded-lg">
+                <h3 class="text-xl font-semibold mt-4">Minimal</h3>
+                <p class="text-gray-400 text-sm">Sleek, distraction-free design that focuses on your content.</p>
+            </div>
+
+            <!-- Creative -->
+            <div onclick="selectTheme(this,'Creative')"
+                class="theme-card bg-neutral-900 border border- p-6 rounded-xl shadow-lg cursor-pointer hover:scale-105 transition hover:shadow-emerald-500/50 hover:shadow-lg transition-transform duration-300">
+                <img src="https://plus.unsplash.com/premium_photo-1681488007344-c75b0cf8b0cd?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Creative Theme Preview" class="h-40 w-full object-cover rounded-lg">
+                <h3 class="text-xl font-semibold mt-4">Creative</h3>
+                <p class="text-gray-400 text-sm">Vibrant and dynamic layout for showcasing artistic portfolios.</p>
+            </div>
+        </div>
+
+        <!-- Continue Button -->
+        <button onclick="continueNext()"
+            class="mt-12 px-8 py-3 bg-emerald-500 rounded-lg shadow-lg hover:bg-emerald-600 transition font-semibold text-lg hover:bg-emerald-600 animate-bounce hover:animate-glow">
+
+            Continue <i class="fa-solid fa-arrow-right ml-2"></i>
+        </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 text-center py-6 text-gray-400">
+        <p>© 2025 AutoFolio. Built with ❤️ for Webathon.</p>
+    </footer>
+
+    <script>
+        let selectedTheme = null;
+
+        function selectTheme(card, themeName) {
+            document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('ring-4', 'ring-emerald-500'));
+            card.classList.add('ring-4', 'ring-emerald-500');
+            selectedTheme = themeName;
+        }
+        // Deselect theme if clicked outside cards
+        document.addEventListener("click", (e) => {
+            // If the click is NOT on a theme card or inside one
+            if (!e.target.closest(".theme-card")) {
+                document.querySelectorAll('.theme-card')
+                    .forEach(c => c.classList.remove('ring-4', 'ring-emerald-500'));
+                selectedTheme = null;
+            }
+            function continueNext() {
+                if (!selectedTheme) {
+                    alert("Please select a theme before continuing!");
+                    return;
+                }
+                alert("You selected: " + selectedTheme + ". Now loading customization...");
+                // redirect to portfolio builder page
+                // window.location.href = "builder.html?theme=" + selectedTheme;
+            }
+
+        });
+
+
+    </script>
+    <style>
+        @keyframes glowPulse {
+            0% {
+                box-shadow: 0 0 10px #10b981;
+            }
+
+            50% {
+                box-shadow: 0 0 20px #10b981;
+            }
+
+            100% {
+                box-shadow: 0 0 10px #10b981;
+            }
+        }
+
+        /* Apply the glow animation only on hover */
+        .hover\:animate-glow:hover {
+            animation: glowPulse 1.5s infinite;
+        }
+    </style>
+
+</body>
+
+</html>
