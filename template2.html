@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{name}} | Portfolio</title>
+    <!-- Icons & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* =====================================================
+       THEME (Dark/Light) via CSS variables
+       ===================================================== */
+        :root {
+            --bg: #0b1220;
+            --bg-soft: rgba(17, 24, 39, 0.65);
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --primary: #22d3ee;
+            --primary-2: #06b6d4;
+            --card: rgba(30, 41, 59, 0.6);
+            --border: #334155;
+            --glass: rgba(255, 255, 255, 0.05);
+            --shadow: 0 25px 50px rgba(34, 211, 238, 0.25);
+        }
+
+        .light {
+            --bg: #f5f7fb;
+            --bg-soft: rgba(255, 255, 255, 0.7);
+            --text: #0f172a;
+            --muted: #334155;
+            --primary: #0ea5e9;
+            --primary-2: #0284c7;
+            --card: rgba(255, 255, 255, 0.75);
+            --border: #e2e8f0;
+            --glass: rgba(0, 0, 0, 0.04);
+            --shadow: 0 10px 30px rgba(2, 132, 199, 0.2);
+            color-scheme: light;
+        }
+
+        /* =====================================================
+       Base Reset & Body
+       ===================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(1000px 800px at 10% 10%, rgba(34, 211, 238, 0.06), transparent 55%),
+                radial-gradient(900px 700px at 90% 90%, rgba(6, 182, 212, 0.06), transparent 55%),
+                linear-gradient(270deg, #0f172a, #111827, #0f172a, #1e293b);
+            background-size: 800% 800%;
+            animation: gradientBG 22s ease infinite;
+            z-index: -3;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Floating tech icons background (subtle) */
+        .float-icons i {
+            position: absolute;
+            opacity: 0.08;
+            font-size: 56px;
+            animation: drift 18s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(-20px) translateX(10px) rotate(10deg);
+            }
+
+            100% {
+                transform: translateY(0) translateX(0) rotate(0);
+            }
+        }
+
+        /* =====================================================
+       Navbar
+       ===================================================== */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 28px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--bg-soft);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: .3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .toggle-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle {
+            width: 56px;
+            height: 30px;
+            border-radius: 999px;
+            position: relative;
+            background: var(--card);
+            border: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .toggle::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 3px;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary);
+            transition: left .25s ease;
+        }
+
+        .toggle.active::after {
+            left: 29px;
+        }
+
+        /* =====================================================
+       Sections / Utilities
+       ===================================================== */
+        section {
+            padding: 90px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            width: min(1100px, 92%);
+            margin-inline: auto;
+        }
+
+        h2.section-title {
+            font-size: 2.4rem;
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 44px;
+            text-shadow: 0 0 10px color-mix(in srgb, var(--primary) 30%, transparent);
+        }
+
+        .btn {
+            background: var(--primary);
+            color: #0b1220;
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: .25s;
+            box-shadow: 0 10px 30px color-mix(in srgb, var(--primary) 30%, transparent);
+        }
+
+        .btn:hover {
+            background: var(--primary-2);
+            transform: translateY(-2px);
+        }
+
+        .chip {
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: .85rem;
+            color: var(--muted);
+            background: var(--glass);
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Appear animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity .7s, transform .7s;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =====================================================
+       HERO (Typewriter + Glass avatar + Resume)
+       ===================================================== */
+        .hero {
+            padding: 130px 20px 100px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Canvas particles layer */
+        #particles {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            opacity: .6;
+        }
+
+        .avatar {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            margin-inline: auto;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 40px color-mix(in srgb, var(--primary) 35%, transparent);
+            transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+            transition: transform .2s ease-out;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin: 18px 0 6px;
+            font-weight: 800;
+            letter-spacing: .5px;
+        }
+
+        .hero .typed {
+            font-size: 1.1rem;
+            color: var(--muted);
+            min-height: 26px;
+        }
+
+        .hero .cta {
+            margin-top: 22px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* =====================================================
+       ABOUT – Terminal/Code window style
+       ===================================================== */
+        .terminal {
+            max-width: 920px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .terminal .top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            background: var(--bg-soft);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red {
+            background: #ff5f56;
+        }
+
+        .dot.yellow {
+            background: #ffbd2e;
+        }
+
+        .dot.green {
+            background: #27c93f;
+        }
+
+        .terminal pre {
+            padding: 20px;
+            white-space: pre-wrap;
+            color: var(--text);
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            background: linear-gradient(180deg, var(--bg-soft), transparent);
+        }
+
+        /* =====================================================
+       STATS counters
+       ===================================================== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+
+        .stat {
+            padding: 18px;
+            text-align: center;
+        }
+
+        .stat h3 {
+            font-size: 2rem;
+        }
+
+        .stat p {
+            color: var(--muted);
+        }
+
+        /* =====================================================
+       SKILLS – SVG circular meters + tooltips
+       ===================================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 18px;
+        }
+
+        .skill {
+            padding: 18px;
+            text-align: center;
+            position: relative;
+        }
+
+        .skill .icon {
+            font-size: 30px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .meter {
+            width: 120px;
+            height: 120px;
+            margin: 8px auto;
+            display: block;
+        }
+
+        .skill .tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            padding: 6px 8px;
+            border-radius: 8px;
+            font-size: .8rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: .2s;
+            color: var(--text);
+        }
+
+        .skill:hover .tooltip {
+            opacity: 1;
+        }
+
+        /* =====================================================
+       PROJECTS – Filters + Glassmorphism cards
+       ===================================================== */
+        .filters {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .project {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform .25s, box-shadow .25s;
+        }
+
+        .project:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .project img {
+            height: 170px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .project .content {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .tag-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        /* =====================================================
+       TIMELINE – Experience / Education
+       ===================================================== */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .t-item {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .t-item::before {
+            content: "";
+            position: absolute;
+            left: -2px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 25%, transparent);
+        }
+
+        .t-item .card {
+            padding: 14px;
+        }
+
+        .t-item h4 {
+            margin-bottom: 4px;
+        }
+
+        .t-item .meta {
+            color: var(--muted);
+            font-size: .9rem;
+        }
+
+        /* =====================================================
+       CERTIFICATIONS
+       ===================================================== */
+        .certs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .cert {
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .cert img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+        }
+
+        /* =====================================================
+       TESTIMONIALS
+       ===================================================== */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .quote {
+            padding: 18px;
+        }
+
+        .quote p {
+            color: var(--muted);
+        }
+
+        .quote .by {
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        /* =====================================================
+       CONTACT – form style
+       ===================================================== */
+        form.contact {
+            max-width: 760px;
+            margin: 0 auto;
+            display: grid;
+            gap: 12px;
+            grid-template-columns: 1fr 1fr;
+            align-items: start;
+        }
+
+        form.contact input,
+        form.contact textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--glass);
+            color: var(--text);
+        }
+
+        form.contact textarea {
+            grid-column: 1 / -1;
+            min-height: 140px;
+        }
+
+        form.contact .actions {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        /* =====================================================
+       FOOTER – social icons
+       ===================================================== */
+        footer {
+            text-align: center;
+            padding: 28px;
+            background: var(--bg-soft);
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+        }
+
+        .socials {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .socials a {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--glass);
+            color: var(--text);
+            transition: .2s;
+        }
+
+        .socials a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating subtle tech icons background -->
+    <div class="float-icons" aria-hidden="true">
+        <i class="fa-brands fa-aws" style="top:10%;left:5%"></i>
+        <i class="fa-brands fa-docker" style="top:18%;right:12%"></i>
+        <i class="fa-brands fa-python" style="bottom:16%;left:10%"></i>
+        <i class="fa-brands fa-git-alt" style="bottom:8%;right:6%"></i>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="card">
+        <div class="brand"><i class="fa-solid fa-code"></i> {{name}}</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#certifications">Certs</a>
+            <a href="#contact">Contact</a>
+            <div class="toggle-wrap">
+                <i class="fa-regular fa-moon"></i>
+                <div id="modeToggle" class="toggle" title="Toggle theme" role="button" aria-label="Toggle dark/light">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <canvas id="particles"></canvas>
+        <div class="container">
+            <div class="avatar card" id="tilt">
+                <img src="{{profile_image}}" alt="{{name}} avatar" />
+            </div>
+            <h1>Hi, I'm {{name}}</h1>
+            <div class="typed" id="typed"></div>
+            <div class="cta">
+                <a class="btn" href="#projects"><i class="fa-solid fa-grid-2"></i> View Work</a>
+                <a class="btn" href="{{resume_url}}" download><i class="fa-solid fa-file-arrow-down"></i> Download
+                    Résumé</a>
+                <a class="btn" href="{{github_url}}" target="_blank" rel="noreferrer"><i
+                        class="fa-brands fa-github"></i> GitHub</a>
+                <a class="btn" href="{{linkedin_url}}" target="_blank" rel="noreferrer"><i
+                        class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT (Terminal style) -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title reveal">About Me</h2>
+            <div class="terminal card reveal">
+                <div class="top">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span style="margin-left:8px;color:var(--muted);font-size:.9rem">about_me.js</span>
+                </div>
+                <pre>
+const name = "{{name}}";
+const role = "{{tagline}}";
+const location = "{{location}}";
+
+const about = `{{about_text}}`;
+
+console.log(`Hi, I'm ${name} — a ${role} based in ${location}.`);
+        </pre>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat card reveal">
+                    <h3 data-count="{{stats.projects|default('20')}}">0</h3>
+                    <p>Projects</p>
+                </div>
+                <div class="stat card reveal">
+                    <h3 data-count="{{stats.clients|default('10')}}">0</h3>
+                    <p>Clients / Teams</p>
+                </div>
+                <div class="stat card reveal">
+                    <h3 data-count="{{stats.hackathons|default('5')}}">0</h3>
+                    <p>Hackathons</p>
+                </div>
+                <div class="stat card reveal">
+                    <h3 data-count="{{stats.repos|default('50')}}">0</h3>
+                    <p>GitHub Repos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS (SVG meters + tooltips) -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title reveal">Tech Stack</h2>
+            <div class="skills-grid">
+                {% for skill in skills %}
+                <div class="skill card reveal" data-level="{{skill.level}}" title="{{skill.name}} – {{skill.level}}%">
+                    <i class="icon {{skill.icon}}"></i>
+                    <svg class="meter" viewBox="0 0 36 36" aria-hidden="true">
+                        <path d="M18 2.0845a 15.9155 15.9155 0 0 1 0 31.831a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none" stroke="rgba(148,163,184,.25)" stroke-width="3" />
+                        <path class="meter-fill"
+                            d="M18 2.0845a 15.9155 15.9155 0 0 1 0 31.831a 15.9155 15.9155 0 0 1 0 -31.831" fill="none"
+                            stroke="var(--primary)" stroke-width="3" stroke-dasharray="0,100" />
+                    </svg>
+                    <div>{{skill.name}}</div>
+                    <div class="tooltip">{{skill.years}} years · {{skill.level}}%</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS (filters + glassmorphism cards) -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title reveal">Projects</h2>
+            <div class="filters reveal">
+                <button class="chip" data-filter="all">All</button>
+                {% for tag in project_tags %}
+                <button class="chip" data-filter="{{tag}}">{{tag}}</button>
+                {% endfor %}
+            </div>
+            <div class="projects">
+                {% for project in projects %}
+                <article class="project card reveal" data-tags="{{project.tags | join(',')}}">
+                    <img src="{{project.image}}" alt="{{project.title}}" />
+                    <div class="content">
+                        <h3>{{project.title}}</h3>
+                        <p style="color:var(--muted)">{{project.description}}</p>
+                        <div class="tag-row">
+                            {% for t in project.tags %}<span class="chip">{{t}}</span>{% endfor %}
+                        </div>
+                        <div style="margin-top:auto;display:flex;gap:10px;flex-wrap:wrap">
+                            {% if project.link %}<a class="btn" href="{{project.link}}" target="_blank"
+                                rel="noreferrer"><i class="fa-solid fa-up-right-from-square"></i> Live</a>{% endif %}
+                            {% if project.repo %}<a class="btn" href="{{project.repo}}" target="_blank"
+                                rel="noreferrer"><i class="fa-brands fa-github"></i> Code</a>{% endif %}
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE + EDUCATION (Timeline) -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title reveal">Experience & Education</h2>
+            <div class="timeline">
+                {% for item in timeline %}
+                <div class="t-item reveal">
+                    <div class="card">
+                        <h4>{{item.role}} — {{item.org}}</h4>
+                        <div class="meta">{{item.start}} – {{item.end}} · {{item.location}}</div>
+                        <p style="color:var(--muted);margin-top:8px">{{item.summary}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications">
+        <div class="container">
+            <h2 class="section-title reveal">Certifications</h2>
+            <div class="certs">
+                {% for c in certs %}
+                <div class="cert card reveal">
+                    <img src="{{c.logo}}" alt="{{c.title}}" />
+                    <div>
+                        <h4>{{c.title}}</h4>
+                        <div class="meta">{{c.issuer}} · {{c.year}}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title reveal">Testimonials</h2>
+            <div class="testimonials">
+                {% for t in testimonials %}
+                <blockquote class="quote card reveal">
+                    <p>“{{t.quote}}”</p>
+                    <div class="by">— {{t.name}}, {{t.title}}</div>
+                </blockquote>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- GITHUB / LEETCODE (badges) -->
+    <section id="devprofiles">
+        <div class="container">
+            <h2 class="section-title reveal">Developer Footprint</h2>
+            <div class="stats">
+                <a class="card stat reveal" href="{{github_url}}" target="_blank" rel="noreferrer">
+                    <img alt="GitHub followers"
+                        src="https://img.shields.io/github/followers/{{github_username}}?style=for-the-badge" />
+                    <img alt="GitHub stars"
+                        src="https://img.shields.io/github/stars/{{github_username}}?affiliations=OWNER&style=for-the-badge" />
+                </a>
+                <a class="card stat reveal" href="{{leetcode_url}}" target="_blank" rel="noreferrer">
+                    <img alt="LeetCode"
+                        src="https://img.shields.io/badge/LeetCode-Profile-orange?style=for-the-badge&logo=LeetCode" />
+                </a>
+                <a class="card stat reveal" href="{{codeforces_url}}" target="_blank" rel="noreferrer">
+                    <img alt="Codeforces"
+                        src="https://img.shields.io/badge/Codeforces-Profile-1f8acb?style=for-the-badge" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title reveal">Contact</h2>
+            <form class="contact card reveal" id="contactForm">
+                <input type="text" name="name" placeholder="Your name" required />
+                <input type="email" name="email" placeholder="Your email" required />
+                <textarea name="message" placeholder="Your message" required></textarea>
+                <div class="actions">
+                    <button class="btn" type="submit"><i class="fa-regular fa-paper-plane"></i> Send</button>
+                    <a class="btn" href="mailto:{{email}}"><i class="fa-solid fa-envelope"></i> Email</a>
+                </div>
+            </form>
+            <p style="text-align:center;color:var(--muted);margin-top:10px">This form is frontend-only. Hook it to your
+                Flask endpoint like <code>/api/contact</code> or use Formspree/EmailJS.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div>&copy; {{current_year}} {{name}}. All rights reserved.</div>
+        <div class="socials">
+            <a href="{{github_url}}" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="{{linkedin_url}}" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="{{twitter_url}}" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="{{website_url}}" aria-label="Website"><i class="fa-solid fa-globe"></i></a>
+        </div>
+    </footer>
+
+    <!-- =====================================================
+       SCRIPTS (All inline to keep single-file)
+       ===================================================== -->
+    <script>
+        // Helper: IntersectionObserver to reveal elements
+        const revealEls = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+            })
+        }, { threshold: 0.2 });
+        revealEls.forEach(el => io.observe(el));
+
+        // 1) Dark / Light mode toggle
+        const root = document.documentElement;
+        const modeToggle = document.getElementById('modeToggle');
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light') { root.classList.add('light'); modeToggle.classList.add('active'); }
+        modeToggle.addEventListener('click', () => {
+            root.classList.toggle('light');
+            modeToggle.classList.toggle('active');
+            localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
+        });
+
+        // 2) Typewriter effect (no external lib)
+        (function typewriter() {
+            const el = document.getElementById('typed');
+            const phrases = {{ typewriter_phrases | tojson | default (['Web Developer', 'Backend with Flask', 'Open-Source Contributor', 'Tech Enthusiast'])
+        }};
+        let p = 0, i = 0, deleting = false;
+        function tick() {
+            const full = phrases[p % phrases.length];
+            i += deleting ? -1 : 1;
+            el.textContent = full.slice(0, i);
+            if (!deleting && i === full.length) { deleting = true; setTimeout(tick, 1200); return; }
+            if (deleting && i === 0) { deleting = false; p++; }
+            setTimeout(tick, deleting ? 35 : 65);
+        }
+        tick();
+    }) ();
+
+        // 3) Canvas particles background (lightweight)
+        (function particles() {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+            let w, h, dots;
+            function resize() { w = canvas.width = canvas.offsetWidth; h = canvas.height = canvas.offsetHeight; init(); }
+            window.addEventListener('resize', resize);
+            function init() {
+                dots = Array.from({ length: Math.floor((w * h) / 20000) + 40 }, () => ({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.6,
+                    vy: (Math.random() - 0.5) * 0.6
+                }));
+            }
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                for (let i = 0; i < dots.length; i++) {
+                    const a = dots[i];
+                    a.x += a.vx; a.y += a.vy;
+                    if (a.x < 0 || a.x > w) a.vx *= -1;
+                    if (a.y < 0 || a.y > h) a.vy *= -1;
+                    ctx.beginPath(); ctx.arc(a.x, a.y, 1.2, 0, Math.PI * 2); ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary'); ctx.fill();
+                    for (let j = i + 1; j < dots.length; j++) {
+                        const b = dots[j];
+                        const dx = a.x - b.x, dy = a.y - b.y, dist = Math.hypot(dx, dy);
+                        if (dist < 110) {
+                            ctx.globalAlpha = 1 - (dist / 110);
+                            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+                            ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+                            ctx.lineWidth = 0.6; ctx.stroke(); ctx.globalAlpha = 1;
+                        }
+                    }
+                }
+                requestAnimationFrame(draw);
+            }
+            resize(); draw();
+        })();
+
+        // 4) Avatar slight 3D tilt
+        (function tilt() {
+            const el = document.getElementById('tilt');
+            el.addEventListener('mousemove', (e) => {
+                const r = el.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - 0.5;
+                const y = (e.clientY - r.top) / r.height - 0.5;
+                el.style.transform = `perspective(800px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg)`;
+            });
+            el.addEventListener('mouseleave', () => el.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)');
+        })();
+
+        // 5) Count-up stats
+        document.querySelectorAll('[data-count]').forEach(el => {
+            const target = +el.getAttribute('data-count');
+            const step = Math.max(1, Math.floor(target / 60));
+            let n = 0;
+            const inc = () => { n = Math.min(target, n + step); el.textContent = n; if (n < target) requestAnimationFrame(inc); };
+            const obs = new IntersectionObserver((entries) => { if (entries[0].isIntersecting) { inc(); obs.disconnect(); } }, { threshold: .6 });
+            obs.observe(el);
+        });
+
+        // 6) Skills circular meters animation
+        document.querySelectorAll('#skills .skill').forEach(card => {
+            const level = +card.dataset.level || 75;
+            const path = card.querySelector('.meter-fill');
+            // 100 length is artificial for easy stroke-dasharray animation
+            const obs = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    let cur = 0; const tick = () => { cur += 2; path.setAttribute('stroke-dasharray', `${Math.min(cur, level)},100`); if (cur < level) requestAnimationFrame(tick); };
+                    tick(); obs.disconnect();
+                }
+            }, { threshold: .6 });
+            obs.observe(card);
+        });
+
+        // 7) Project filters
+        const filterButtons = document.querySelectorAll('.filters [data-filter]');
+        const projectCards = document.querySelectorAll('.project');
+        filterButtons.forEach(btn => btn.addEventListener('click', () => {
+            const tag = btn.getAttribute('data-filter');
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            projectCards.forEach(card => {
+                const tags = (card.getAttribute('data-tags') || '').split(',').map(s => s.trim().toLowerCase());
+                card.style.display = (tag === 'all' || tags.includes(tag.toLowerCase())) ? '' : 'none';
+            });
+        }));
+
+        // 8) Contact form (frontend placeholder)
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(e.target).entries());
+            // Replace with fetch('/api/contact', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)})
+            alert('Thanks, ' + data.name + '! Your message has been captured (demo). Connect this form to your Flask backend.');
+            e.target.reset();
+        });
+    </script>
+</body>
+
+</html>
