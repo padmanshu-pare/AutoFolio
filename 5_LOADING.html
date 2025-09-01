@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoFolio | Loading</title>
+    <!-- GSAP -->
+    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/SplitText.min.js"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@600&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eadcff, #038b6b, #14b690);
+            font-family: "Fredoka One", cursive;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .message {
+            position: absolute;
+            text-align: center;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .message h1 {
+            font-size: 3rem;
+            color: #ffffff;
+            /* Simple clean white text */
+            font-weight: bold;
+        }
+
+        .message button {
+            background: linear-gradient(135deg, #00ffae, #000000);
+            color: #fff;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(255, 0, 204, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .message button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.7);
+        }
+
+        /* Loader Section */
+        .outer-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9;
+        }
+
+        .outer-container .container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(-200px);
+        }
+
+        .outer-container .container .letters {
+            display: flex;
+            justify-content: center;
+            margin-left: 1rem;
+            position: absolute;
+            color: #00e5ff;
+            font-size: 1.7rem;
+            letter-spacing: 1rem;
+            text-align: center;
+        }
+
+        .outer-container .container .bowl {
+            width: 15.75rem;
+            height: 6.25rem;
+            background: #2e2e2e;
+            border-radius: 0.4rem 0.34em 7rem 7rem;
+            border-bottom: 0.4rem solid #555;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .outer-container .container .bowl .loader {
+            position: absolute;
+            width: 0;
+            height: 0.5rem;
+            background: linear-gradient(90deg, #ff00cc, #00ffcc, #3333ff);
+            top: 0.5rem;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Message After Loading -->
+    <div class="message" id="message">
+        <h1>✨ Your Portfolio is Ready! ✨</h1>
+        <button onclick="window.location.href='6_portfolio_AARAV.html'">🚀 See My Portfolio</button>
+    </div>
+
+    <!-- Loader -->
+    <div class="outer-container">
+        <div class="container">
+            <p class="letters">LOADING</p>
+            <div class="bowl">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const timeline = gsap.timeline({});
+        const timeline2 = gsap.timeline({});
+
+        let split = SplitText.create(".letters", {
+            type: "chars",
+            charsClass: "char"
+        });
+
+        timeline
+            .to(".container", {
+                y: "0",
+                duration: 1,
+                opacity: 1,
+                ease: "elastic.out(1,0.3)"
+            })
+            .to(".loader", {
+                width: "100%",
+                duration: 5,
+                ease: "expoScale(0.5,7,none)"
+            })
+            .to(".outer-container", {
+                y: "100vh",
+                duration: 1.5,
+                ease: "power4.inOut",
+                onComplete: () => {
+                    document.getElementById("message").style.display = "flex";
+                    gsap.from("#message h1", {
+                        opacity: 0,
+                        y: 50,
+                        duration: 1,
+                        ease: "back.out(1.7)"
+                    });
+                    gsap.from("#message button", {
+                        opacity: 0,
+                        y: 50,
+                        duration: 1,
+                        delay: 0.3,
+                        ease: "bounce.out"
+                    });
+                }
+            });
+
+        split.chars.forEach((spl) => {
+            timeline2.fromTo(
+                spl,
+                {
+                    y: "0px",
+                    opacity: 0
+                },
+                {
+                    y: "-100px",
+                    opacity: 1,
+                    yoyo: true,
+                    repeat: -1,
+                    delay: 0.2,
+                    rotation: () => gsap.utils.random(-30, 30)
+                }
+            );
+        });
+
+    </script>
+</body>
+
+</html>
