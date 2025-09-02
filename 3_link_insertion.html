@@ -2,17 +2,18 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AutoFolio | Add Your Links</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- pdf.js (optional if you want to preview PDFs later) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 </head>
 
 <body class="bg-zinc-950 text-white font-sans">
   <!-- Particle Background -->
   <div id="particles-js" class="absolute top-0 left-0 w-full h-full -z-10"></div>
-
 
   <!-- Navbar -->
   <nav class="fixed w-full top-0 z-50 bg-neutral-900 backdrop-blur-md shadow-md">
@@ -25,102 +26,124 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="flex flex-col items-center justify-center min-w-screen px-6 pt-24 ">
-    <div class="max-w-lg w-full bg-white/10 backdrop-blur-msm border border-white/20 
-            p-8 rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300">
+  <section class="flex flex-col items-center justify-center min-h-screen px-6 pt-24">
+    <div
+      class="max-w-lg w-full bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl shadow-2xl transition-transform duration-300">
 
-      <h2 class="text-3xl font-extrabold  text-center mb-6">
+      <h2 class="text-3xl font-extrabold text-center mb-6">
         Share Your Professional Links
       </h2>
-      <p class="text-gray-400 text-center mb-10">
-        Showcase your <span class="text-emerald-400 font-semibold">LinkedIn</span>,
-        <span class="text-emerald-400 font-semibold">GitHub</span>,
-        and <span class="text-emerald-400 font-semibold">Resume</span> — all in one portfolio.
+      <p class="text-gray-400 text-center mb-8">
+        Add your <span class="text-emerald-400 font-semibold">GitHub</span>,
+        upload your <span class="text-emerald-400 font-semibold">LinkedIn (PDF)</span>
+        and <span class="text-emerald-400 font-semibold">Resume (PDF)</span>.
       </p>
 
-      <!-- Form -->
-      <!-- Form -->
       <form id="profileForm" class="space-y-6">
+
+        <!-- LinkedIn PDF -->
         <div>
-          <label for="linkedin" class="block mb-2 font-semibold">LinkedIn URL</label>
-          <input type="url" id="linkedin" class="w-full px-4 py-3 rounded-lg bg-emerald-100/10 text-white border border-gray-700 
-             hover:border-emerald-400 hover:shadow-[0_0_15px_#34d399] 
-             outline-none transition-all duration-300" placeholder="https://linkedin.com/in/username">
+          <label for="linkedinFile" class="block mb-2 font-semibold">Upload LinkedIn (PDF)</label>
+          <input type="file" id="linkedinFile" accept="application/pdf" class="w-full file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 
+            file:text-sm file:font-semibold file:bg-emerald-500 file:text-white 
+            hover:file:bg-emerald-600 cursor-pointer bg-emerald-100/10 text-white border border-gray-700 
+            focus:border-emerald-400 outline-none transition-all duration-300" required>
         </div>
+
+        <!-- GitHub URL -->
         <div>
-          <label for="github" class="block mb-2 font-semibold">GitHub URL</label>
-          <input type="url" id="github" class="w-full px-4 py-3 rounded-lg bg-emerald-100/10 text-white border border-gray-700 
-             hover:border-emerald-400 hover:shadow-[0_0_15px_#34d399] 
-             outline-none transition-all duration-300" placeholder="https://github.com/username">
+          <label for="github" class="block mb-2 font-semibold">GitHub URL (or username)</label>
+          <input type="text" id="github" class="w-full px-4 py-3 rounded-lg bg-emerald-100/10 text-white border border-gray-700 
+            focus:border-emerald-400 outline-none transition-all duration-300"
+            placeholder="https://github.com/username" required>
+          <p id="gh-username-hint" class="text-xs text-gray-400 mt-1"></p>
         </div>
+
+        <!-- Resume PDF -->
         <div>
-          <label for="resume" class="block mb-2 font-semibold">Resume Link (Drive/PDF)</label>
-          <input type="url" id="resume" class="w-full px-4 py-3 rounded-lg bg-emerald-100/10 text-white border border-gray-700 
-             hover:border-emerald-400 hover:shadow-[0_0_15px_#34d399] 
-             outline-none transition-all duration-300" placeholder="https://drive.google.com/..." required>
+          <label for="resumeFile" class="block mb-2 font-semibold">Upload Resume (PDF)</label>
+          <input type="file" id="resumeFile" accept="application/pdf" class="w-full file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 
+            file:text-sm file:font-semibold file:bg-emerald-500 file:text-white 
+            hover:file:bg-emerald-600 cursor-pointer bg-emerald-100/10 text-white border border-gray-700 
+            focus:border-emerald-400 outline-none transition-all duration-300" required>
         </div>
-        <button class="w-full bg-emerald-500 text-white py-3 rounded-lg font-bold 
-                 shadow-lg hover:bg-emerald-600 hover:shadow-emerald-500/50 
-                 transition-all duration-300">
-          Next
+
+        <button type="submit" id="nextBtn" class="w-full bg-emerald-500 text-white py-3 rounded-lg font-bold 
+          shadow-lg hover:bg-emerald-600 hover:shadow-emerald-500/50 
+          transition-all duration-300 flex items-center justify-center gap-2">
+          <span>Next</span>
+          <span id="loader"
+            class="hidden animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>
         </button>
       </form>
 
-
-
+      <div id="status" class="text-sm text-gray-300 mt-4 whitespace-pre-wrap"></div>
     </div>
   </section>
 
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
+    // particles.js config
     particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-        "color": { "value": "#00ff88" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.5, "random": true },
-        "size": { "value": 3, "random": true },
-        "line_linked": { "enable": true, "distance": 150, "color": "#00ff88", "opacity": 0.4, "width": 1 },
-        "move": { "enable": true, "speed": 2, "direction": "none", "out_mode": "bounce" }
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#00ff88" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: "#00ff88", opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 2, direction: "none", out_mode: "bounce" }
       },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-          "onhover": { "enable": true, "mode": "repulse" },
-          "onclick": { "enable": true, "mode": "push" }
-        },
-        "modes": {
-          "repulse": { "distance": 100, "duration": 0.4 },
-          "push": { "particles_nb": 4 }
-        }
+      interactivity: {
+        detect_on: "canvas",
+        events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" } },
+        modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
       },
-      "retina_detect": true
+      retina_detect: true
     });
-  </script>
 
+    // Convert File → Base64
+    const toBase64 = (file) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (err) => reject(err);
+    });
 
-</body>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("profileForm");
+    // Handle form submit
+    document.getElementById("profileForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault(); // prevent normal form submit
-
-      const linkedin = document.getElementById("linkedin").value.trim();
+      const linkedinFile = document.getElementById("linkedinFile").files[0];
       const github = document.getElementById("github").value.trim();
-      const resume = document.getElementById("resume").value.trim();
+      const resumeFile = document.getElementById("resumeFile").files[0];
 
-      if (linkedin, github, resume) {
-        // ✅ All fields filled → redirect
-        window.location.href = "4_theme_select.html";
-      } else {
-        // ❌ If any field is empty
-        alert("Please enter all the links before continuing.");
+      if (!linkedinFile || !resumeFile || !github) {
+        alert("⚠️ Please upload both PDFs and enter your GitHub.");
+        return;
+      }
+
+      try {
+        const linkedinBase64 = await toBase64(linkedinFile);
+        const resumeBase64 = await toBase64(resumeFile);
+
+        const userData = JSON.parse(localStorage.getItem("user")) || {};
+        userData.github = github;
+        userData.linkedinPDF = linkedinBase64;
+        userData.resumePDF = resumeBase64;
+
+        localStorage.setItem("user", JSON.stringify(userData));
+
+        document.getElementById("status").textContent = "✅ Files saved successfully! Redirecting...";
+        setTimeout(() => {
+          window.location.href = "4_theme_select.html";
+        }, 1000);
+      } catch (err) {
+        console.error(err);
+        document.getElementById("status").textContent = "❌ Error saving files.";
       }
     });
-  });
-</script>
-
+  </script>
+</body>
 
 </html>
