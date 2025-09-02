@@ -32,15 +32,16 @@
             position: absolute;
             text-align: center;
             display: none;
+            /* hidden initially */
             flex-direction: column;
             align-items: center;
             gap: 20px;
+            z-index: 20;
         }
 
         .message h1 {
             font-size: 3rem;
             color: #ffffff;
-            /* Simple clean white text */
             font-weight: bold;
         }
 
@@ -107,7 +108,7 @@
             position: absolute;
             width: 0;
             height: 0.5rem;
-            background: linear-gradient(90deg, #ff00cc, #00ffcc, #3333ff);
+            background: linear-gradient(90deg, #ff54dd, #51ffdc, #6161fe);
             top: 0.5rem;
             border-radius: 5px;
         }
@@ -118,7 +119,7 @@
     <!-- Message After Loading -->
     <div class="message" id="message">
         <h1>✨ Your Portfolio is Ready! ✨</h1>
-        <button onclick="window.location.href='6_portfolio_AARAV.html'">🚀 See My Portfolio</button>
+        <button id="continueBtn">🚀 See My Portfolio</button>
     </div>
 
     <!-- Loader -->
@@ -157,23 +158,12 @@
                 duration: 1.5,
                 ease: "power4.inOut",
                 onComplete: () => {
+                    // show the message instead of auto-redirect
                     document.getElementById("message").style.display = "flex";
-                    gsap.from("#message h1", {
-                        opacity: 0,
-                        y: 50,
-                        duration: 1,
-                        ease: "back.out(1.7)"
-                    });
-                    gsap.from("#message button", {
-                        opacity: 0,
-                        y: 50,
-                        duration: 1,
-                        delay: 0.3,
-                        ease: "bounce.out"
-                    });
                 }
             });
 
+        // Floating text effect
         split.chars.forEach((spl) => {
             timeline2.fromTo(
                 spl,
@@ -192,7 +182,29 @@
             );
         });
 
+        // 🚀 Handle Continue Button Click
+        document.getElementById("continueBtn").addEventListener("click", () => {
+            const theme = localStorage.getItem("selectedTheme");
+
+            switch (theme) {
+                case "Classic":
+                    window.location.href = "8_classic_temp.html";
+                    break;
+                case "Techy":
+                    window.location.href = "7_tech_temp.html";
+                    break;
+                case "Minimal":
+                    window.location.href = "9_minimal_temp.html";
+                    break;
+                case "Creative":
+                    window.location.href = "10_creative_temp.html";
+                    break;
+                default:
+                    window.location.href = "4_theme_select.html";
+            }
+        });
     </script>
+
 </body>
 
 </html>
