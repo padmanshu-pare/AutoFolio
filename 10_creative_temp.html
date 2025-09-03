@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Designer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+') repeat;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            33% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+
+            66% {
+                transform: translateY(-15px) rotate(-5deg);
+            }
+        }
+
+        .project-card {
+            background: rgb(222, 222, 222);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.05) rotateY(-2deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            margin: 15% auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 8px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #bbb;
+        }
+
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        .testimonial-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            color: #1f2937;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: #8b5cf6;
+            position: absolute;
+            left: -10px;
+            top: -20px;
+            font-weight: bold;
+            opacity: 0.3;
+        }
+
+        .testimonial-author img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-author img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .modern-button {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0c1b61 30%, #ff6a4d 100%);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .modern-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .modern-button:hover::before {
+            left: 100%;
+        }
+
+        .modern-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: #030000;
+            position: relative;
+        }
+
+        .section-title2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: #000000;
+            position: relative;
+        }
+
+        .section-title3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .experience-line {
+            position: relative;
+        }
+
+        .experience-line::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #4A90E2;
+            transform: translateX(-50%);
+        }
+
+        .experience-item {
+            margin-left: 50%;
+            padding-left: 20px;
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .experience-item.awake {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .counter {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .counter {
+            background: linear-gradient(135deg, #051c81, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm border-b border-white/20">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div
+                class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                <i class="fas fa-palette mr-2"></i>
+                Alex Design
+            </div>
+            <ul class="flex space-x-8">
+                <li><a href="#home" class="relative group font-medium text-gray-700 transition-colors">
+                        Home
+                        <span
+                            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+                    </a></li>
+                <li><a href="#about" class="relative group font-medium text-gray-700 transition-colors">
+                        About
+                        <span
+                            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+                    </a></li>
+                <li><a href="#services" class="relative group font-medium text-gray-700 transition-colors">
+                        Services
+                        <span
+                            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+                    </a></li>
+                <li><a href="#portfolio" class="relative group font-medium text-gray-700 transition-colors">
+                        Portfolio
+                        <span
+                            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+                    </a></li>
+                <li><a href="#contact" class="relative group font-medium text-gray-700 transition-colors">
+                        Contact
+                        <span
+                            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+                    </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+        <div class="floating-elements">
+            <div class="floating-circle"></div>
+            <div class="floating-triangle"></div>
+            <div class="floating-square"></div>
+            <div class="floating-hexagon"></div>
+            <div class="floating-pentagon"></div>
+            <div class="floating-star"></div>
+            <div class="floating-oval"></div>
+        </div>
+        <div class="hero-content container mx-auto px-6 text-center relative z-10">
+            <div class="mb-8" data-aos="fade-in" data-aos-duration="1000">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c261f8c9-cd3f-46a1-be8e-3379b05bd9a3.png"
+                    alt="Portrait of Alex Designer, a modern professional with a creative vibe, wearing contemporary glasses and a designer shirt against a clean geometric background"
+                    class="w-48 h-48 rounded-full mx-auto border-8 border-white/30 backdrop-blur-sm shadow-2xl">
+            </div>
+            <h1 class="text-7xl md:text-8xl font-black mb-6 leading-tight text-white" data-aos="fade-up"
+                data-aos-delay="200">
+                <span>Crafting <span class="text-yellow-300">Bold</span> & <span class="text-pink-300">Beautiful</span>
+                    Designs</span>
+            </h1>
+            <p class="text-2xl text-gray-100 mb-10 max-w-4xl mx-auto leading-relaxed" data-aos="fade-up"
+                data-aos-delay="400">
+                Crafting extraordinary digital experiences that blend artistry, technology, and human-centered design.
+            </p>
+            <a href="#portfolio" class="inline-block modern-button px-12 py-5 rounded-full font-bold text-xl shadow-2xl"
+                data-aos="fade-up" data-aos-delay="600">
+                Explore My Work
+            </a>
+        </div>
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-4xl"></i>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 bg-gradient-to-br from-white via-gray-50 to-indigo-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-4xl mb-6" data-aos="fade-up">About Me</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b7fc87c1-2468-4a43-91c6-59ffadee1af1.png"
+                        alt="Alex Designer in modern workspace, surrounded by creative tools, design mockups on dual monitors, artistic atmosphere with natural lighting"
+                        class="rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-500">
+                </div>
+                <div data-aos="fade-left">
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        I'm Alex, a multidisciplinary designer with a passion for creating meaningful digital
+                        experiences. With over 12 years of expertise, I bridge the gap between beautiful aesthetics and
+                        functional design.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        When I'm not designing, you can find me exploring local art galleries or experimenting with
+                        culinary creations.
+                    </p>
+                    <div class="grid grid-cols-3 gap-6 mt-8">
+                        <div class="text-center" data-aos="zoom-in">
+                            <div class="counter text-4xl font-black mb-2" data-target="275">156</div>
+                            <p class="text-gray-600 font-semibold">Projects Completed</p>
+                        </div>
+                        <div class="text-center" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="counter text-4xl font-black mb-2" data-target="220"></div>
+                            <p class="text-gray-600 font-semibold">Happy Clients</p>
+                        </div>
+                        <div class="text-center" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="counter text-4xl font-black mb-2" data-target="12">12</div>
+                            <p class="text-gray-600 font-semibold">Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section id="services" class="py-24 bg-grey-100 text-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title2 text-4xl mb-6" data-aos="fade-up">My Services</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="skill-card glass-morphism rounded-3xl p-8 text-center group" data-aos="fade-up">
+                    <div
+                        class="bg-white/20 p-6 rounded-2xl inline-block mb-6 group-hover:scale-110 transition-all duration-300">
+                        <i class="fas fa-drafting-compass text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Branding & Identity</h3>
+                    <p class="leading-relaxed">Complete brand strategies that resonate with your audience and stand out
+                        in crowded markets.</p>
+                </div>
+                <div class="skill-card glass-morphism rounded-3xl p-8 text-center group" data-aos="fade-up"
+                    data-aos-delay="200">
+                    <div
+                        class="bg-white/20 p-6 rounded-2xl inline-block mb-6 group-hover:scale-110 transition-all duration-300">
+                        <i class="fas fa-mobile-alt text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">UI/UX Design</h3>
+                    <p class="leading-relaxed">Intuitive interfaces and seamless user experiences that drive engagement
+                        and conversion.</p>
+                </div>
+                <div class="skill-card glass-morphism rounded-3xl p-8 text-center group" data-aos="fade-up"
+                    data-aos-delay="400">
+                    <div
+                        class="bg-white/20 p-6 rounded-2xl inline-block mb-6 group-hover:scale-110 transition-all duration-300">
+                        <i class="fas fa-print text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Print & Digital Media</h3>
+                    <p class="leading-relaxed">Striking designs for posters, brochures, packaging, and digital content
+                        across platforms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4" data-aos="fade-up">My Experience</h2>
+                <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
+            </div>
+            <div class="experience-line max-w-2xl mx-auto">
+                <div class="experience-item awake" data-aos="fade-left">
+                    <div class="bg-blue-100 p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-800">Senior Designer</h3>
+                        <p class="text-gray-600">Tech Innovations Inc. | 2020 - Present</p>
+                        <p class="text-gray-600 mt-2">Leading design team for major tech products, improving user
+                            satisfaction by 40%.</p>
+                    </div>
+                </div>
+                <div class="experience-item awake" data-aos="fade-right"
+                    style="margin-left: 0; margin-right: 50%; padding-right: 20px; padding-left: 0; transform: translateX(20px);">
+                    <div class="bg-green-100 p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-800">UI/UX Designer</h3>
+                        <p class="text-gray-600">Creative Solutions | 2018 - 2020</p>
+                        <p class="text-gray-600 mt-2">Redesigned mobile apps, increasing engagement by 25%.</p>
+                    </div>
+                </div>
+                <div class="experience-item awake" data-aos="fade-left">
+                    <div class="bg-purple-100 p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-bold text-gray-800">Junior Designer</h3>
+                        <p class="text-gray-600">Startup Ventures | 2015 - 2018</p>
+                        <p class="text-gray-600 mt-2">Created branding and marketing materials for growing companies.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-24 bg-grey-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-4xl mb-6" data-aos="fade-up">Selected Projects</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="project-card rounded-3xl overflow-hidden group cursor-pointer" onclick="openModal('img1')"
+                    data-aos="fade-up">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/69a3b7cb-f6ec-40e7-ac76-8178b3ecb56a.png"
+                        alt="Elegant mobile app interface for luxury fashion brand with minimalist design and gradient accents">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-indigo-600 transition-colors">
+                            Luxe Fashion App</h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">Redefining the luxury retail experience with
+                            cutting-edge design and intuitive navigation.</p>
+                    </div>
+                </div>
+                <div class="project-card rounded-3xl overflow-hidden group cursor-pointer" onclick="openModal('img2')"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/91fda3c6-17bc-4558-877b-e5111d58f9c3.png"
+                        alt="Vibrant website redesign for sustainable lifestyle brand with interactive elements and clean typography">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-purple-600 transition-colors">
+                            Sustainable Living</h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">A refreshing digital presence that inspires
+                            eco-conscious living through beautiful, functional design.</p>
+                    </div>
+                </div>
+                <div class="project-card rounded-3xl overflow-hidden group cursor-pointer" onclick="openModal('img3')"
+                    data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e8172f3d-e6e7-43aa-838a-dbeb0de69ca8.png"
+                        alt="Bold branding campaign for coffee roasters with vinyl illustrations and contemporary packaging">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-purple-800 transition-colors">
+                            Coffee Roaster Brand</h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">Crafting a brand identity that combines artisanal
+                            tradition with modern aesthetic sensibilities.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12" data-aos="fade-up">
+                <button class="modern-button px-10 py-4 rounded-full font-bold text-lg">View All Projects</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-4xl mb-6" data-aos="fade-up">Client Testimonials</h2>
+            </div>
+            <div class="testimonial-slider max-w-3xl mx-auto">
+                <div class="testimonial-slide active text-center" data-aos="fade-in">
+                    <p class="testimonial-quote mb-6">
+                        Alex's creativity and attention to detail brought our brand to life in ways we never imagined.
+                        The new identity has truly elevated our presence.
+                    </p>
+                    <div class="testimonial-author mb-6">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5a217e3d-0b89-4839-9ff1-f07ca6366d21.png"
+                            alt="Portrait of Sophia Rodriguez, CEO of sustainable fashion retail company" />
+                        <div class="mt-4">
+                            <p class="font-bold text-lg">Sophia Rodriguez</p>
+                            <p class="text-gray-600">CEO, EcoLuxe Fashion</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide text-center" data-aos="fade-in">
+                    <p class="testimonial-quote mb-6">
+                        The mobile app design exceeded our expectations. User engagement skyrocketed, and the feedback
+                        has been overwhelmingly positive.
+                    </p>
+                    <div class="testimonial-author mb-6">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/684aef16-b500-471c-bf70-76efa030d50d.png"
+                            alt="Portrait of Michael Chen, CTO of tech startup WellFit" />
+                        <div class="mt-4">
+                            <p class="font-bold text-lg">Michael Chen</p>
+                            <p class="text-gray-600">CTO, WellFit Apps</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-slide text-center" data-aos="fade-in">
+                    <p class="testimonial-quote mb-6">
+                        Working with Alex was a delight. The eco campaign posters captured our mission perfectly and
+                        helped us engage the community deeply.
+                    </p>
+                    <div class="testimonial-author mb-6">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/089a4b03-fe88-407c-ac7c-250bc664929f.png"
+                            alt="Portrait of Emma Thompson, Director of Artisan Coffee Company" />
+                        <div class="mt-4">
+                            <p class="font-bold text-lg">Emma Thompson</p>
+                            <p class="text-gray-600">Director, Artisan Brew</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </selection>
+        <br><br><br>
+
+        <section id="blog" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4" data-aos="fade-up">Latest Thoughts</h2>
+                    <div class="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300"
+                        data-aos="fade-up">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/645cef3e-7f1c-4742-9d81-3d1d85397b40.png"
+                            alt="Minimalist design principles in a modern illustration, showing balance and simplicity with geometric shapes and text overlays"
+                            class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">The Power of Minimalism in Design</h3>
+                            <p class="text-gray-600 mb-4">Exploring how less can be more in visual communication.</p>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 transition">Read More &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ed820f1f-0d4f-4f8b-bae1-45865787699f.png"
+                            alt="Vibrant color palette selection for branding, showcasing complementary colors with swatches and brand application examples"
+                            class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Color Psychology in Branding</h3>
+                            <p class="text-gray-600 mb-4">How the right colors can influence consumer behavior.</p>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 transition">Read More &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300"
+                        data-aos="fade-up" data-aos-delay="400">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4bbc7b56-053a-48f7-b980-31a06b39353c.png"
+                            alt="Future of design tools, AI integration concept with futuristic interfaces and robot designer illustration"
+                            class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">AI in Design: Friend or Foe?</h3>
+                            <p class="text-gray-600 mb-4">Navigating the integration of AI tools in creative processes.
+                            </p>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 transition">Read More &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-24 bg-gradient-to-r from-gray-800 to-black text-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="section-title3 text-4xl mb-6" data-aos="fade-up">Let's Create Together</h2>
+                    <p class="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed" data-aos="fade-up"
+                        data-aos-delay="200">
+                        Have a project in mind? I'd love to hear about it. Let's discuss how we can bring your vision to
+                        life through extraordinary design.
+                    </p>
+                </div>
+                <div class="max-w-lg mx-auto">
+                    <form class="glass-morphism rounded-3xl p-8" data-aos="fade-up" data-aos-delay="400">
+                        <div class="mb-6">
+                            <label class="block text-sm font-semibold mb-3" for="name">Name</label>
+                            <input
+                                class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                id="name" type="text" placeholder="Your Name">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-semibold mb-3" for="email">Email</label>
+                            <input
+                                class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                id="email" type="email" placeholder="your.email@example.com">
+                        </div>
+                        <div class="mb-8">
+                            <label class="block text-sm font-semibold mb-3" for="message">Message</label>
+                            <textarea
+                                class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none h-32"
+                                id="message" placeholder="Tell me about your project..."></textarea>
+                        </div>
+                        <button class="w-full modern-button py-4 rounded-xl font-bold text-lg" type="button">Send
+                            Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <div id="myModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage" alt="Project detailed view">
+            <div id="caption" class="text-center text-white mt-4 px-4"></div>
+        </div>
+
+        <footer class="bg-black py-12">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-4 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-white mb-6">Alex Design</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Creating meaningful connections through exceptional design.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-white mb-6">Connect</h4>
+                        <div class="flex space-x-4">
+                            <a href="#"
+                                class="w-10 h-10 bg-white/10 hover:bg-indigo-600 rounded-full flex items-center justify-center transition-all duration-300">
+                                <i class="fab fa-linkedin text-white"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 bg-white/10 hover:bg-pink-600 rounded-full flex items-center justify-center transition-all duration-300">
+                                <i class="fab fa-dribbble text-white"></i>
+                            </a>
+                            <a href="#"
+                                class="w-10 h-10 bg-white/10 hover:bg-blue-600 rounded-full flex items-center justify-center transition-all duration-300">
+                                <i class="fab fa-behance text-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-white mb-6">Contact</h4>
+                        <p class="text-gray-400">hello@alexdesign.com</p>
+                        <p class="text-gray-400">+1 (555) 123-4567</p>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 pt-8 text-center">
+                    <p class="text-gray-600">© 2023 Alex Design. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            AOS.init();
+
+            function openModal(imgId) {
+                const modal = document.getElementById("myModal");
+                const modalImg = document.getElementById("modalImage");
+                const caption = document.getElementById("caption");
+
+                const clickedImg = document.querySelector(`[onclick*="${imgId}"] img`);
+                modalImg.src = clickedImg.src;
+                caption.innerHTML = clickedImg.alt;
+
+                modal.style.display = "block";
+            }
+
+            function closeModal() {
+                document.getElementById("myModal").style.display = "none";
+            }
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const headerOffset = 80;
+                        const targetPosition = target.offsetTop - headerOffset;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Counter animation
+            function animateCounters() {
+                const counters = document.querySelectorAll('.counter');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const count = parseInt(counter.innerText);
+                    const increment = target / 200;
+                    if (count < target) {
+                        counter.innerText = Math.floor(count + increment);
+                        setTimeout(animateCounters, 10);
+                    } else {
+                        counter.innerText = target;
+                    }
+                });
+            }
+
+            // Trigger counter animation on scroll
+            let counterTriggered = false;
+            window.addEventListener('scroll', () => {
+                const aboutSection = document.getElementById('about');
+                const rect = aboutSection.getBoundingClientRect();
+                if (rect.top <= window.innerHeight && rect.bottom >= 0 && !counterTriggered) {
+                    animateCounters();
+                    counterTriggered = true;
+                }
+            });
+
+            // Testimonial slider
+            let currentTestimonial = 0;
+            const testimonials = document.querySelectorAll('.testimonial-slide');
+
+            function showTestimonial(index) {
+                testimonials.forEach((test, i) => {
+                    test.classList.remove('active');
+                });
+                testimonials[index].classList.add('active');
+            }
+
+            function nextTestimonial() {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }
+
+            function prevTestimonial() {
+                currentTestimonial = currentTestimonial === 0 ? testimonials.length - 1 : currentTestimonial - 1;
+                showTestimonial(currentTestimonial);
+            }
+
+            setInterval(nextTestimonial, 5000);
+        </script>
+</body>
+
+</html>
+</content>
+</create_file>
